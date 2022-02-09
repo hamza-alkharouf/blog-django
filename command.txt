@@ -1,0 +1,8 @@
+pip3 install virtualenv .
+virtualenv venv
+venv\Scripts\activate
+pip3 install django
+mkdir src && cd src
+django-admin startproject my_blog .
+python manage.py startapp blog
+python manage.py startapp user
