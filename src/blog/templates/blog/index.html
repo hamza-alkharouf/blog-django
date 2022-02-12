@@ -1,4 +1,17 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+
 <h1>اخر التدوينات</h1>
+
+{% for post in posts %}
+    <div class="post p-3 m-4">
+        <img class="img-fluid rounded-circle border m-2" width="70" src="https://ps.w.org/simple-user-avatar/assets/icon-128x128.png?rev=2413146" alt="صورة الناشر">
+        <span class="text-secondary">نشر في {{ post.post_date }}</span>
+        <h4>
+            <a href="" class="text-dark">{{ post.title }}</a>
+        </h4>
+        <p>{{ post.content }}</p>
+    </div>
+{% endfor %}
+
 {% endblock content %}

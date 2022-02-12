@@ -25,3 +25,9 @@ body{
 a:link{
     text-decoration: none !important;
 }
+
+/* Stat Post content */
+ .post{
+    border: 1px solid #ccc ;
+}
+/* end Post content */

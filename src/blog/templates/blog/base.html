@@ -6,7 +6,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% if title %}
+    <title>مدونة | {{ title }}</title>
+    {% else %}
+    <title>مدونة</title>
+    {% endif %}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    
     <link rel="stylesheet icon" href="{% static 'blog/images/favicon.ico' %}?ver=2">
@@ -20,7 +24,7 @@
         <!--Start Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="{% url 'home' %}">
                   <img src="{% static 'blog/images/mim-logo.png' %}" width="30px" alt="شعار مدونة">
                 مدونة</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +33,7 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">الرئيسية</a>
+                    <a class="nav-link active" aria-current="page"  href="{% url 'home' %}">الرئيسية</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,7 +48,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link" href="#">من انا</a>
+                    <a class="nav-link" href="{% url 'about' %}">من انا</a>
                   </li>
                 </ul>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
