@@ -30,3 +30,10 @@ class Comment(models.Model):
     comment_date = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+
+
+    def __str__(self):
+        return '.علق {} على {} '.format(self.name, self.post)
+
+    class Meta:
+        ordering =('-comment_date', )    
