@@ -12,3 +12,6 @@ python manage.py runserver
 #python manage.py makemigrations -> convert class like model to sql
 #python manage.py sqlmigrate blog 0001
 #python manage.py migrate -> execute sql 
+
+
+pip install django-crispy-forms => for style css
