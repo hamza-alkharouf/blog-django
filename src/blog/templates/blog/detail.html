@@ -12,11 +12,30 @@
     </div>
 
     <div>
-        <h1 class="border-botton">التعليقات</h1>
-        {% for comment in comments %}
-        <small>{{ comment.name }} في {{ comment.comment_date|date:'d-m-Y' }}</small>
-        <p>{{ comment.body }}</p>
+        <h1 class="border-bottom mt-5 mb-3">التعليقات ({{ comments.count }})</h1>
 
+        {% for comment in comments %}
+
+        <ul class="p-3 comment">
+            <h6 class="border-bottom p-2">( {{ comment.name }} )</h6><span class="text-secondary">{{ comment.comment_date|date:'d-m-Y' }}</span>
+
+            {{ comment.body }}
+        </ul>
+
+        {% empty %}
+
+        <h6 class="text-center p-4 comment">لا يوجد تعليقات</h6>
         {% endfor %}
     </div>
+
+
+
+
+    <h3 class="border-bottom pd-3 mb-3 mt-5">أضافة تعليق جديد</h3>
+    <form action="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" class="btn btn-secondary mb-4" value="نشر التعليق">
+    </form>
+
 {% endblock content %}
