@@ -72,16 +72,12 @@
                     {% endblock content %}
                 </div>
                 <div class="col-md-4">
+
                     <div class="card m-3">
                         <h3 class="text-center bg-secondary text-light p-2">اخر التدوينات</h3>
-                        <ul>
-                            <li><a href="#" class="a-link">التدوينة الاولى</a></li>
-                            <li><a href="#" class="a-link">التدوينة الثانية</a></li>
-                            <li><a href="#" class="a-link">التدوينة الثالثة</a></li>
-                            <li><a href="#" class="a-link">التدوينة الرابعة</a></li>
-                            <li><a href="#" class="a-link">التدوينة الخامسة</a></li>
-                        </ul>
+                        {% include 'blog/latest_posts.html' %}
                     </div>
+
                     <div class="card m-3">
                         <h3 class="text-center bg-secondary text-light p-2">اخر التعليقات</h3>
                         <ul>
