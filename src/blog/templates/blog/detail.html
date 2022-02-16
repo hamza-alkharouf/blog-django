@@ -32,7 +32,7 @@
     <h3 class="border-bottom pd-3 mb-3 mt-5">أضافة تعليق جديد</h3>
 
     <div class="border p-4 mb-5 mt-4">
-        <form action="POST">
+        <form method="POST">
 
             {% csrf_token %} {{ comment_form|crispy }}
             <input type="submit" class="btn btn-secondary" value="نشر التعليق">
