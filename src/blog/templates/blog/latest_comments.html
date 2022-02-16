@@ -1,8 +1,14 @@
 
 <ul class="list-group-flush latest-comment">
-    {% for comment in comments %}
+    {% for comment in l_comments %}
     <li class="list-group-item latest-comment-item">
-        <a href="{% url 'detail' comment.post.pk %}" class="text-dark">{{ comment.body }}</a>
+        <a href="{% url 'detail' comment.post.pk %}" class="text-dark">
+            {% if comment.body|length > 30 %}
+            {{ comment.body|slice:'35' }} ..
+            {% else %}
+            {{ comment.body }}
+            {% endif %}
+        </a>
     </li>
     {% empty %}
     <li class="list-group-item latest-comment-item">

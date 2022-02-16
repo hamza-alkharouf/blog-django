@@ -1,8 +1,15 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 
-<h1>اخر التدوينات</h1>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif%}
 
+<h1>اخر التدوينات</h1>
 {% for post in posts %}
     <div class="post p-3 m-4">
         <img class="img-fluid rounded-circle border m-2" width="70" src="https://ps.w.org/simple-user-avatar/assets/icon-128x128.png?rev=2413146" alt="صورة الناشر">
