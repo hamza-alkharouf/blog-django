@@ -28,3 +28,10 @@ class UserCreationForm(forms.ModelForm):
         return clean_data['username']
 
 
+class LoginForm(forms.ModelForm):
+    username =forms.CharField(label='اسم المستخدم')
+    password =forms.CharField(label='كلمة المرور', widget=forms.PasswordInput())
+
+    class Meta:
+        model =User
+        fields = ('username', 'password')

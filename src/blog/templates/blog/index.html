@@ -1,13 +1,7 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif%}
+
 
 <h1>اخر التدوينات</h1>
 {% for post in posts %}
