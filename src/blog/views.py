@@ -34,13 +34,10 @@ def post_detail(request, post_id):
     else:
         comment_form = NewComment()
         
-
     context = { 
         'title': post,
         'post' : post,
         'comments' :comments,
         'comment_form' :comment_form,
     }
-
-    
     return render(request, 'blog/detail.html', context)
