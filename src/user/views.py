@@ -1,10 +1,13 @@
 from email import message
+from multiprocessing import context
+import re
 from django.shortcuts import render, redirect
-from .forms import UserCreationForm, LoginForm
+from .forms import UserCreationForm, LoginForm,UserUpadeForm, ProfileUpadeForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from blog.models import Post
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
 
 
 def register(request):
@@ -53,9 +56,43 @@ def logout_user(request):
 @login_required(login_url='login')
 def profile(request):
     posts = Post.objects.filter(author =request.user)
+    post_list = Post.objects.filter(author =request.user)
+
+    paginator =Paginator(post_list,2)
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+
 
     return render(request, 'user/profile.html', {
         'title': 'الملف الشخصي',
         'posts': posts,
+        'page':page,
+        'post_list':post_list,
     })
    
+@login_required(login_url='login')
+def profile_update(request):
+    if request.method == 'POST':
+        user_form = UserUpadeForm(request.POST, instance = request.user)
+        profile_form = ProfileUpadeForm(request.POST, request.FILES, instance = request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'تم تحديث الملف الشخصي ')
+            return redirect('profile')
+    else:
+        user_form = UserUpadeForm(instance = request.user)
+        profile_form = ProfileUpadeForm(instance = request.user.profile)
+    
+    context = {
+        'title' : 'تعديل الملف الشخصي',
+        'user_form' : user_form,
+        'profile_form' : profile_form,
+
+    }
+    return render(request, 'user/profile_update.html', context)
