@@ -4,6 +4,7 @@ from .forms import UserCreationForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from blog.models import Post
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -12,10 +13,11 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
             form.save()
-            username = form.cleaned_data['username']
-            messages.success(request, f'تهانينا {username} لقد تمت عملية التسجيل بنجاح')
-            return redirect('home')
+            messages.success(request, f'تهانينا {new_user} لقد تمت عملية التسجيل بنجاح')
+            return redirect('login')
     else:
         form = UserCreationForm()
 
@@ -34,7 +36,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('profile')
         else:
             messages.warning(request,'هناك خطأ في اسم المستخدم وكلمة المرور.')
 
@@ -48,7 +50,7 @@ def logout_user(request):
             'title':'تسجيل الخروج',
         })
 
-
+@login_required(login_url='login')
 def profile(request):
     posts = Post.objects.filter(author =request.user)
 

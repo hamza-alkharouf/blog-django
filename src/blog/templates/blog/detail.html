@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
     <div class="post p-3 m-4">
-        <img class="img-fluid rounded-circle border m-2" width="70" src="https://ps.w.org/simple-user-avatar/assets/icon-128x128.png?rev=2413146" alt="صورة الناشر">
+        <img class="img-fluid rounded-circle border m-2" width="70" src="{{ post.author.profile.image.url }}" alt="صورة الناشر">
         <span class="text-secondary">نشر في {{ post.post_date |date:'d-m-Y' }}</span>
         <h4>
             {{ post.title }}
