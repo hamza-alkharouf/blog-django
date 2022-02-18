@@ -1,6 +1,5 @@
 from email import message
 from multiprocessing import context
-import re
 from django.shortcuts import render, redirect
 from .forms import UserCreationForm, LoginForm,UserUpadeForm, ProfileUpadeForm
 from django.contrib import messages
